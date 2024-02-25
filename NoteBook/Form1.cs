@@ -189,10 +189,10 @@ namespace NoteBook
         /// <param name="e"></param>
         private void цветШрифтаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ColorDialog colorDialog = new ColorDialog();
-            if (colorDialog.ShowDialog() == DialogResult.OK)
+            ColorDialog color = new ColorDialog();
+            if (color.ShowDialog() == DialogResult.OK)
             {
-                this.richTextBox1.ForeColor = colorDialog.Color;
+                richTextBox1.SelectionColor = color.Color;
             }
         }
         /// <summary>
@@ -202,7 +202,10 @@ namespace NoteBook
         /// <param name="e"></param>
         private void копироватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(richTextBox1.SelectedText);
+            if(richTextBox1.SelectionLength != 0)
+            {
+                Clipboard.SetText(richTextBox1.SelectedText);
+            }
         }
         /// <summary>
         /// Кнопка для вырезки текста
@@ -211,7 +214,7 @@ namespace NoteBook
         /// <param name="e"></param>
         private void вырезатьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (richTextBox1.SelectionLength != 0)
+            if (richTextBox1.SelectionLength != 0) 
             {
                 Clipboard.SetText(richTextBox1.SelectedText);
                 richTextBox1.Text = richTextBox1.Text.Remove(richTextBox1.SelectionStart, richTextBox1.SelectionLength);
